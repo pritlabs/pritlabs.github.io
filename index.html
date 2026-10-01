@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prit | Embedded Systems, IoT & AI</title>
+
+    <meta name="description"
+          content="Prit is an AI & Data Science student at GEC Rajkot building practical projects in Embedded Systems, IoT, ESP8266, Wireless Communication and AI.">
+
+    <meta name="keywords"
+          content="Prit, Embedded Systems, IoT, ESP8266, NodeMCU, ESP-NOW, AI, Data Science, GEC Rajkot, Electronics Projects">
+
+    <meta name="author" content="Prit">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Prit | Embedded Systems, IoT & AI">
+    <meta property="og:description"
+          content="Projects and learning journey in Embedded Systems, IoT and AI.">
+    <meta property="og:type" content="website">
+
+    <style>
+
+        /* =========================================
+           GLOBAL
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(88, 101, 242, 0.15),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 20%,
+                    rgba(0, 200, 255, 0.10),
+                    transparent 30%
+                ),
+                #070b14;
+
+            color: #f5f7ff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            width: min(1120px, 92%);
+            margin: auto;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* =========================================
+           NAVIGATION
+        ========================================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            background: rgba(7, 11, 20, 0.78);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .nav-container {
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #6c8cff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #b9c1d9;
+            font-size: 14px;
+            transition: 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .github-btn {
+            padding: 9px 17px;
+
+            border-radius: 9px;
+
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+
+            color: white !important;
+
+            transition: 0.25s;
+        }
+
+        .github-btn:hover {
+            background: rgba(255,255,255,0.14);
+            transform: translateY(-2px);
+        }
+
+        .menu-btn {
+            display: none;
+
+            background: none;
+            border: none;
+
+            color: white;
+            font-size: 28px;
+
+            cursor: pointer;
+        }
+
+        /* =========================================
+           HERO
+        ========================================= */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+
+            padding-top: 120px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 14px;
+
+            border-radius: 999px;
+
+            background: rgba(108,140,255,0.10);
+            border: 1px solid rgba(108,140,255,0.25);
+
+            color: #aebeff;
+
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+
+            background: #48e38a;
+
+            border-radius: 50%;
+
+            box-shadow: 0 0 12px rgba(72,227,138,0.8);
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 7vw, 82px);
+            line-height: 1.02;
+            letter-spacing: -3px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(
+                90deg,
+                #7c9cff,
+                #55d8ff
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .hero-description {
+            max-width: 650px;
+
+            color: #aab3cc;
+
+            font-size: 18px;
+            line-height: 1.8;
+
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 21px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: 0.25s;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(
+                135deg,
+                #667eea,
+                #4facfe
+            );
+
+            color: white;
+
+            box-shadow:
+                0 10px 35px rgba(79,172,254,0.18);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 15px 40px rgba(79,172,254,0.30);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.04);
+
+            color: #d9def0;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.09);
+            transform: translateY(-3px);
+        }
+
+        /* =========================================
+           HERO CARD
+        ========================================= */
+
+        .hero-card {
+            position: relative;
+
+            padding: 30px;
+
+            min-height: 350px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.09),
+                    rgba(255,255,255,0.025)
+                );
+
+            border: 1px solid rgba(255,255,255,0.10);
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.35);
+
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            background: #667eea;
+
+            filter: blur(100px);
+
+            opacity: 0.15;
+
+            top: -70px;
+            right: -70px;
+        }
+
+        .terminal {
+            font-family: "Courier New", monospace;
+            color: #b9c7ff;
+
+            font-size: 14px;
+
+            line-height: 2;
+        }
+
+        .terminal .green {
+            color: #63e6a0;
+        }
+
+        .terminal .blue {
+            color: #70a0ff;
+        }
+
+        .terminal .white {
+            color: #ffffff;
+        }
+
+        /* =========================================
+           SECTION HEADERS
+        ========================================= */
+
+        .section-header {
+            margin-bottom: 45px;
+        }
+
+        .section-label {
+            color: #6f94ff;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 2px;
+
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 46px);
+
+            letter-spacing: -1.5px;
+
+            margin-bottom: 12px;
+        }
+
+        .section-description {
+            color: #929bb5;
+
+            max-width: 680px;
+        }
+
+        /* =========================================
+           ABOUT
+        ========================================= */
+
+        .about-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 30px;
+        }
+
+        .glass-card {
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+            transition: 0.3s;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(108,140,255,0.25);
+
+            background:
+                rgba(255,255,255,0.05);
+        }
+
+        .about-text {
+            color: #a9b2ca;
+            line-height: 1.9;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            display: flex;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 15px 0;
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.07);
+
+            color: #a9b2ca;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-list strong {
+            color: white;
+        }
+
+        /* =========================================
+           SKILLS
+        ========================================= */
+
+        .skills-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+        .skill-card {
+            padding: 24px;
+
+            border-radius: 16px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+        .skill-icon {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .skill-card h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .skill-card p {
+            color: #8f98b2;
+            font-size: 14px;
+        }
+
+        /* =========================================
+           PROJECTS
+        ========================================= */
+
+        .projects-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+        .project-card {
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+
+            min-height: 430px;
+
+            padding: 26px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.065),
+                    rgba(255,255,255,0.025)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            transition:
+                transform 0.3s,
+                border-color 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+
+            border-color:
+                rgba(108,140,255,0.35);
+        }
+
+        .project-number {
+            color: #6f94ff;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            margin-bottom: 18px;
+        }
+
+        .project-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .project-card p {
+            color: #949db7;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+            margin-bottom: 20px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+
+            margin-top: auto;
+        }
+
+        .tag {
+            padding: 6px 9px;
+
+            border-radius: 7px;
+
+            font-size: 11px;
+
+            background:
+                rgba(108,140,255,0.08);
+
+            color: #aabdff;
+
+            border:
+                1px solid rgba(108,140,255,0.15);
+        }
+
+        /* =========================================
+           ROADMAP
+        ========================================= */
+
+        .roadmap {
+            position: relative;
+
+            max-width: 850px;
+        }
+
+        .roadmap::before {
+            content: "";
+
+            position: absolute;
+
+            left: 14px;
+            top: 0;
+            bottom: 0;
+
+            width: 2px;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #667eea,
+                    rgba(102,126,234,0.05)
+                );
+        }
+
+        .roadmap-item {
+            position: relative;
+
+            padding-left: 55px;
+
+            margin-bottom: 38px;
+        }
+
+        .roadmap-dot {
+            position: absolute;
+
+            left: 6px;
+            top: 5px;
+
+            width: 18px;
+            height: 18px;
+
+            border-radius: 50%;
+
+            background: #667eea;
+
+            border: 4px solid #070b14;
+
+            box-shadow:
+                0 0 18px rgba(102,126,234,0.6);
+        }
+
+        .roadmap-item h3 {
+            font-size: 19px;
+            margin-bottom: 6px;
+        }
+
+        .roadmap-item p {
+            color: #929bb5;
+        }
+
+        /* =========================================
+           FUTURE CONTENT
+        ========================================= */
+
+        .future-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .future-card {
+            padding: 28px;
+
+            border-radius: 18px;
+
+            background:
+                rgba(255,255,255,0.03);
+
+            border:
+                1px solid rgba(255,255,255,0.07);
+        }
+
+        .future-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .future-card p {
+            color: #929bb5;
+
+            font-size: 14px;
+        }
+
+        /* =========================================
+           CONTACT
+        ========================================= */
+
+        .contact-card {
+            text-align: center;
+
+            padding: 60px 30px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(102,126,234,0.12),
+                    rgba(79,172,254,0.05)
+                );
+
+            border:
+                1px solid rgba(102,126,234,0.18);
+        }
+
+        .contact-card h2 {
+            font-size: 38px;
+
+            letter-spacing: -1px;
+
+            margin-bottom: 15px;
+        }
+
+        .contact-card p {
+            color: #9ba4bd;
+
+            max-width: 600px;
+
+            margin:
+                0 auto 25px;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+            padding: 30px 0;
+
+            border-top:
+                1px solid rgba(255,255,255,0.07);
+
+            color: #747d96;
+
+            font-size: 13px;
+        }
+
+        .footer-container {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-card {
+                display: none;
+            }
+
+            .skills-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .projects-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .future-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            section {
+                padding: 75px 0;
+            }
+
+            .nav-links {
+                display: none;
+
+                position: absolute;
+
+                top: 72px;
+                left: 0;
+
+                width: 100%;
+
+                padding: 20px;
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                background:
+                    rgba(7,11,20,0.97);
+
+                border-bottom:
+                    1px solid rgba(255,255,255,0.08);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .github-btn {
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 50px;
+                letter-spacing: -2px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .skills-grid,
+            .projects-grid,
+            .future-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-card h2 {
+                font-size: 30px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- =========================================
+     NAVIGATION
+========================================= -->
+
+<nav>
+
+    <div class="container nav-container">
+
+        <a href="#home" class="logo">
+            Prit<span>.</span>
+        </a>
+
+        <button class="menu-btn" onclick="toggleMenu()">
+            ☰
+        </button>
+
+        <div class="nav-links" id="navLinks">
+
+            <a href="#home">Home</a>
+
+            <a href="#about">About</a>
+
+            <a href="#skills">Skills</a>
+
+            <a href="#projects">Projects</a>
+
+            <a href="#roadmap">Roadmap</a>
+
+            <a href="#contact">Contact</a>
+
+            <a
+                href="https://github.com/PritLabs"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="github-btn"
+            >
+                GitHub
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<section class="hero" id="home">
+
+    <div class="container hero-grid">
+
+        <div>
+
+            <div class="badge">
+
+                <span class="status-dot"></span>
+
+                Building • Learning • Engineering
+
+            </div>
+
+            <h1>
+                Hi, I'm <span>Prit.</span>
+            </h1>
+
+            <p class="hero-description">
+
+                I'm an AI & Data Science student at GEC Rajkot
+                exploring <strong>Embedded Systems, IoT and AI</strong>.
+
+                I enjoy turning ideas into practical hardware and
+                software projects using microcontrollers,
+                wireless communication and intelligent systems.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#projects" class="btn btn-primary">
+                    View My Projects
+                </a>
+
+                <a href="#about" class="btn btn-secondary">
+                    About Me
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-card">
+
+            <div class="terminal">
+
+                <div>
+                    <span class="blue">prit@portfolio</span>:~$
+                    <span class="white">whoami</span>
+                </div>
+
+                <div class="green">
+                    Prit
+                </div>
+
+                <br>
+
+                <div>
+                    <span class="blue">prit@portfolio</span>:~$
+                    <span class="white">focus</span>
+                </div>
+
+                <div>
+                    Embedded Systems
+                </div>
+
+                <div>
+                    IoT Engineering
+                </div>
+
+                <div>
+                    Artificial Intelligence
+                </div>
+
+                <br>
+
+                <div>
+                    <span class="blue">prit@portfolio</span>:~$
+                    <span class="white">projects</span>
+                </div>
+
+                <div class="green">
+                    ESP8266
+                </div>
+
+                <div class="green">
+                    ESP-NOW
+                </div>
+
+                <div class="green">
+                    Wi-Fi IoT
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     ABOUT
+========================================= -->
+
+<section id="about">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div class="section-label">
+                About
+            </div>
+
+            <h2 class="section-title">
+                Building toward Embedded & IoT Engineering
+            </h2>
+
+            <p class="section-description">
+                My current focus is learning how hardware,
+                firmware, networking and intelligent software
+                work together to create real-world systems.
+            </p>
+
+        </div>
+
+
+        <div class="about-grid">
+
+            <div class="glass-card">
+
+                <p class="about-text">
+
+                    I'm currently studying AI & Data Science and
+                    using practical electronics and microcontroller
+                    projects to build my engineering skills.
+
+                    <br><br>
+
+                    My goal is to become an
+                    <strong>Embedded and IoT Engineer</strong>
+                    and gradually move toward intelligent,
+                    connected systems and Edge AI.
+
+                    <br><br>
+
+                    I believe the best way to learn engineering
+                    is to build, test, debug and improve real
+                    systems.
+
+                </p>
+
+            </div>
+
+
+            <div class="glass-card">
+
+                <ul class="info-list">
+
+                    <li>
+                        <span>Name</span>
+                        <strong>Prit</strong>
+                    </li>
+
+                    <li>
+                        <span>College</span>
+                        <strong>GEC Rajkot</strong>
+                    </li>
+
+                    <li>
+                        <span>Semester</span>
+                        <strong>5th</strong>
+                    </li>
+
+                    <li>
+                        <span>Current Focus</span>
+                        <strong>Embedded & IoT</strong>
+                    </li>
+
+                    <li>
+                        <span>Future Focus</span>
+                        <strong>Edge AI</strong>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     SKILLS
+========================================= -->
+
+<section id="skills">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div class="section-label">
+                Skills
+            </div>
+
+            <h2 class="section-title">
+                Technologies I'm Exploring
+            </h2>
+
+            <p class="section-description">
+                A growing technical stack built through
+                practical projects and continuous learning.
+            </p>
+
+        </div>
+
+
+        <div class="skills-grid">
+
+            <div class="skill-card">
+
+                <div class="skill-icon">
+                    💻
+                </div>
+
+                <h3>
+                    Programming
+                </h3>
+
+                <p>
+                    C/C++ and Python for embedded programming,
+                    automation and AI/ML.
+                </p>
+
+            </div>
+
+
+            <div class="skill-card">
+
+                <div class="skill-icon">
+                    🔌
+                </div>
+
+                <h3>
+                    Embedded
+                </h3>
+
+                <p>
+                    ESP8266, NodeMCU, GPIO, buttons,
+                    LEDs and microcontroller projects.
+                </p>
+
+            </div>
+
+
+            <div class="skill-card">
+
+                <div class="skill-icon">
+                    📡
+                </div>
+
+                <h3>
+                    IoT & Wireless
+                </h3>
+
+                <p>
+                    Wi-Fi, ESP-NOW and wireless
+                    device-to-device communication.
+                </p>
+
+            </div>
+
+
+            <div class="skill-card">
+
+                <div class="skill-icon">
+                    🤖
+                </div>
+
+                <h3>
+                    AI & Data
+                </h3>
+
+                <p>
+                    Artificial Intelligence, Machine Learning,
+                    Data Science and future Edge AI systems.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     PROJECTS
+========================================= -->
+
+<section id="projects">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div class="section-label">
+                Projects
+            </div>
+
+            <h2 class="section-title">
+                Things I've Built
+            </h2>
+
+            <p class="section-description">
+                Practical projects where I learned by building,
+                testing and debugging real hardware systems.
+            </p>
+
+        </div>
+
+
+        <div class="projects-grid">
+
+
+            <!-- PROJECT 1 -->
+
+            <article class="project-card">
+
+                <div class="project-number">
+                    PROJECT 01
+                </div>
+
+                <h3>
+                    ESP8266 Two-Board Calculator
+                </h3>
+
+                <p>
+
+                    A two-ESP8266 calculator system using a
+                    4×3 keypad and 16×2 LCD.
+
+                    One NodeMCU receives keypad input and
+                    communicates the data to another NodeMCU,
+                    which displays the result.
+
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        ESP8266
+                    </span>
+
+                    <span class="tag">
+                        NodeMCU
+                    </span>
+
+                    <span class="tag">
+                        Keypad
+                    </span>
+
+                    <span class="tag">
+                        LCD
+                    </span>
+
+                    <span class="tag">
+                        Serial
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 2 -->
+
+            <article class="project-card">
+
+                <div class="project-number">
+                    PROJECT 02
+                </div>
+
+                <h3>
+                    ESP-NOW Wireless LED Remote
+                </h3>
+
+                <p>
+
+                    A wireless remote-control system using
+                    two ESP8266 boards.
+
+                    A button press on the transmitter sends
+                    a command through ESP-NOW to the receiver,
+                    which toggles an LED.
+
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        ESP8266
+                    </span>
+
+                    <span class="tag">
+                        ESP-NOW
+                    </span>
+
+                    <span class="tag">
+                        Wireless
+                    </span>
+
+                    <span class="tag">
+                        GPIO
+                    </span>
+
+                    <span class="tag">
+                        Button
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 3 -->
+
+            <article class="project-card">
+
+                <div class="project-number">
+                    PROJECT 03
+                </div>
+
+                <h3>
+                    Wi-Fi Smart LED Dashboard
+                </h3>
+
+                <p>
+
+                    A web-based IoT dashboard running directly
+                    on an ESP8266.
+
+                    A phone or computer can connect to the
+                    device and control an LED through a
+                    browser interface.
+
+                    Features include ON/OFF control,
+                    blinking and adjustable blink speed.
+
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        ESP8266
+                    </span>
+
+                    <span class="tag">
+                        Wi-Fi
+                    </span>
+
+                    <span class="tag">
+                        Web Server
+                    </span>
+
+                    <span class="tag">
+                        HTML
+                    </span>
+
+                    <span class="tag">
+                        IoT
+                    </span>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     ROADMAP
+========================================= -->
+
+<section id="roadmap">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div class="section-label">
+                Learning Journey
+            </div>
+
+            <h2 class="section-title">
+                Where I'm Going
+            </h2>
+
+            <p class="section-description">
+                A practical roadmap from microcontrollers
+                toward connected and intelligent systems.
+            </p>
+
+        </div>
+
+
+        <div class="roadmap">
+
+
+            <div class="roadmap-item">
+
+                <div class="roadmap-dot"></div>
+
+                <h3>
+                    Embedded Fundamentals
+                </h3>
+
+                <p>
+                    C/C++, GPIO, ADC, PWM, UART, interrupts,
+                    timers and microcontroller fundamentals.
+                </p>
+
+            </div>
+
+
+            <div class="roadmap-item">
+
+                <div class="roadmap-dot"></div>
+
+                <h3>
+                    IoT Engineering
+                </h3>
+
+                <p>
+                    Wi-Fi, MQTT, sensors, device communication,
+                    APIs and connected IoT systems.
+                </p>
+
+            </div>
+
+
+            <div class="roadmap-item">
+
+                <div class="roadmap-dot"></div>
+
+                <h3>
+                    Advanced Embedded
+                </h3>
+
+                <p>
+                    ESP32, FreeRTOS, communication protocols,
+                    reliability, debugging and real-world
+                    embedded architecture.
+                </p>
+
+            </div>
+
+
+            <div class="roadmap-item">
+
+                <div class="roadmap-dot"></div>
+
+                <h3>
+                    Edge AI
+                </h3>
+
+                <p>
+                    Combining machine learning with
+                    microcontrollers and edge devices to
+                    create intelligent embedded systems.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     FUTURE CONTENT
+========================================= -->
+
+<section>
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div class="section-label">
+                Coming Soon
+            </div>
+
+            <h2 class="section-title">
+                More Than a Portfolio
+            </h2>
+
+            <p class="section-description">
+                This website will gradually become a practical
+                learning resource for students and engineers.
+            </p>
+
+        </div>
+
+
+        <div class="future-grid">
+
+
+            <div class="future-card">
+
+                <h3>
+                    🔧 Electronics Guides
+                </h3>
+
+                <p>
+                    Beginner-friendly explanations of
+                    microcontrollers, sensors, circuits,
+                    communication protocols and electronics.
+                </p>
+
+            </div>
+
+
+            <div class="future-card">
+
+                <h3>
+                    📚 Project Tutorials
+                </h3>
+
+                <p>
+                    Complete project explanations including
+                    components, wiring, architecture, code,
+                    debugging and improvements.
+                </p>
+
+            </div>
+
+
+            <div class="future-card">
+
+                <h3>
+                    🎯 Viva & Interview
+                </h3>
+
+                <p>
+                    Practical viva questions, embedded
+                    interview questions and explanations
+                    based on real projects.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     CONTACT
+========================================= -->
+
+<section id="contact">
+
+    <div class="container">
+
+        <div class="contact-card">
+
+            <h2>
+                Let's Build Something
+            </h2>
+
+            <p>
+
+                I'm continuously learning and building
+                projects in Embedded Systems, IoT and AI.
+
+                Follow my projects and learning journey
+                on GitHub.
+
+            </p>
+
+            <a
+                href="https://github.com/PritLabs"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary"
+            >
+                Visit My GitHub
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <div class="container footer-container">
+
+        <div>
+            © <span id="year"></span> Prit.
+            Built while learning Embedded Systems, IoT & AI.
+        </div>
+
+        <div class="footer-links">
+
+            <a
+                href="https://github.com/PritLabs"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                GitHub
+            </a>
+
+            <a href="#home">
+                Back to Top ↑
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script>
+
+    function toggleMenu() {
+
+        const nav =
+            document.getElementById("navLinks");
+
+        nav.classList.toggle("active");
+
+    }
+
+
+    /* Close mobile menu after clicking a link */
+
+    document
+        .querySelectorAll(".nav-links a")
+        .forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                document
+                    .getElementById("navLinks")
+                    .classList.remove("active");
+
+            });
+
+        });
+
+
+    /* Automatic copyright year */
+
+    document
+        .getElementById("year")
+        .textContent =
+        new Date().getFullYear();
+
+</script>
+
+</body>
+</html>
